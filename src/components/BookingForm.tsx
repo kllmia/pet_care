@@ -38,10 +38,21 @@ export function BookingForm() {
         </select>
       </label>
       <label className="full">
+        期望到店時間
+        <input
+          aria-describedby="preferred-time-hint"
+          name="preferredTime"
+          type="datetime-local"
+        />
+        <span id="preferred-time-hint" className="field-hint">
+          營業時間為週二至週日 10:00 - 19:00，實際時段將由專人回覆確認。
+        </span>
+      </label>
+      <label className="full">
         備註
         <textarea
           name="message"
-          placeholder="可以留下毛孩個性、皮膚狀況、希望預約的日期或特殊需求。"
+          placeholder="可以留下毛孩個性、皮膚狀況或其他特殊需求。"
         />
       </label>
       <button className="btn btn-primary full" type="submit">
