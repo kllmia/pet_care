@@ -456,13 +456,76 @@ section {
 }
 
 .reviews {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding-block: 6px;
+  mask-image: linear-gradient(90deg, transparent, #000 9%, #000 91%, transparent);
+}
+
+.reviews::before,
+.reviews::after {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 2;
+  width: 72px;
+  content: "";
+  pointer-events: none;
+}
+
+.reviews::before {
+  left: 0;
+  background: linear-gradient(90deg, #edf7f3, rgba(237, 247, 243, 0));
+}
+
+.reviews::after {
+  right: 0;
+  background: linear-gradient(270deg, #edf7f3, rgba(237, 247, 243, 0));
+}
+
+.review-track {
+  display: flex;
+  width: max-content;
   gap: 16px;
+  animation: review-marquee 34s linear infinite;
+}
+
+.reviews:hover .review-track,
+.reviews:focus-within .review-track {
+  animation-play-state: paused;
 }
 
 .review-card {
+  width: clamp(280px, 32vw, 368px);
+  min-height: 218px;
   padding: 24px;
+  box-shadow: 0 12px 28px rgba(34, 48, 45, 0.08);
+}
+
+.review-card p {
+  min-height: 92px;
+}
+
+.review-card h3 {
+  margin-top: 18px;
+  color: var(--sage-dark);
+}
+
+@keyframes review-marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 8px));
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .review-track {
+    animation: none;
+  }
 }
 
 .stars {
@@ -598,7 +661,6 @@ textarea {
   .stats,
   .services,
   .prices,
-  .reviews,
   .split,
   .booking-grid {
     grid-template-columns: 1fr;
@@ -610,6 +672,20 @@ textarea {
 
   .feature-photo {
     min-height: 360px;
+  }
+
+  .reviews {
+    margin-inline: -18px;
+  }
+
+  .reviews::before,
+  .reviews::after {
+    width: 36px;
+  }
+
+  .review-card {
+    width: min(78vw, 330px);
+    min-height: 238px;
   }
 }
 

@@ -51,6 +51,26 @@ const reviews = [
     name: "張小姐",
     body: "造型很自然，不會剪得太誇張。每次都會提醒皮膚狀況和居家梳毛方式。",
   },
+  {
+    name: "黃小姐",
+    body: "我家狗狗很怕吹風，這裡會分段休息，沒有硬來。接回家時精神很好，香味也很舒服。",
+  },
+  {
+    name: "吳先生",
+    body: "預約前溝通很清楚，會先說明可能加價的狀況。實際完成後和預期一樣，價格透明。",
+  },
+  {
+    name: "許太太",
+    body: "老犬關節比較敏感，美容師抱上抱下都很小心，還會提醒家裡地板要防滑，真的很貼心。",
+  },
+  {
+    name: "蔡小姐",
+    body: "貓咪洗完沒有躲一整天，毛結也慢慢處理掉，不會為了趕時間把孩子弄得很緊張。",
+  },
+  {
+    name: "郭先生",
+    body: "每次修剪都會保留我們喜歡的圓臉感，照片回報也很即時，是可以放心固定來的店。",
+  },
 ];
 
 export default function Home() {
@@ -199,16 +219,22 @@ export default function Home() {
               <h2>毛孩舒服，飼主也放心。</h2>
               <p>很多客人第一次來是因為毛孩緊張，後來留下來是因為每次都被好好對待。</p>
             </div>
-            <div className="reviews">
-              {reviews.map((review) => (
-                <article className="review-card" key={review.name}>
-                  <div className="stars" aria-label="五星評價">
-                    ★★★★★
-                  </div>
-                  <p>{review.body}</p>
-                  <h3>{review.name}</h3>
-                </article>
-              ))}
+            <div className="reviews" aria-label="顧客評價輪播">
+              <div className="review-track">
+                {[...reviews, ...reviews].map((review, index) => (
+                  <article
+                    className="review-card"
+                    key={`${review.name}-${index}`}
+                    aria-hidden={index >= reviews.length}
+                  >
+                    <div className="stars" aria-label="五星評價">
+                      ★★★★★
+                    </div>
+                    <p>{review.body}</p>
+                    <h3>{review.name}</h3>
+                  </article>
+                ))}
+              </div>
             </div>
           </div>
         </section>
