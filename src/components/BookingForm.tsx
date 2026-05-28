@@ -4,6 +4,7 @@ import { FormEvent, useState } from "react";
 
 export function BookingForm() {
   const [submitted, setSubmitted] = useState(false);
+  const preferredTimeDefault = getTomorrowMorningTime();
 
   function handleSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -41,6 +42,7 @@ export function BookingForm() {
         期望到店時間
         <input
           aria-describedby="preferred-time-hint"
+          defaultValue={preferredTimeDefault}
           name="preferredTime"
           type="datetime-local"
         />
@@ -65,4 +67,18 @@ export function BookingForm() {
       ) : null}
     </form>
   );
+}
+
+function getTomorrowMorningTime() {
+  const tomorrowMorning = new Date();
+  tomorrowMorning.setDate(tomorrowMorning.getDate() + 1);
+  tomorrowMorning.setHours(9, 30, 0, 0);
+
+  const year = tomorrowMorning.getFullYear();
+  const month = String(tomorrowMorning.getMonth() + 1).padStart(2, "0");
+  const day = String(tomorrowMorning.getDate()).padStart(2, "0");
+  const hours = String(tomorrowMorning.getHours()).padStart(2, "0");
+  const minutes = String(tomorrowMorning.getMinutes()).padStart(2, "0");
+
+  return `${year}-${month}-${day}T${hours}:${minutes}`;
 }
