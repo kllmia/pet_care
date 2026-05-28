@@ -230,7 +230,7 @@ export default function Home() {
                   <Image
                     alt="泡泡尾巴寵物美容位置地圖"
                     fill
-                    sizes="(max-width: 860px) 100vw, 420px"
+                    sizes="100vw"
                     src="/assets/store-map-zhudong-51.png"
                   />
                 </div>
